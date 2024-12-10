@@ -144,6 +144,21 @@ navigate to the OpenSplitTime directory and type:
 $ bin/dev
 ```
 
+Setup Project Using Docker
+-------------------------
+* Make sure docker in installed on your machine.
+* Create .env file in project root directory.
+* Copy contents of .env_example file to .env file.
+* Fill in values for required credentials.
+* Run following command to run project using containers:
+    ```
+    docker compose up --build -d
+    ```
+Once all containers are up, it is time to seed database. To seed database with starting data run following commands in a new terminal:
+* ```docker compose run app bundle exec rails db:setup```
+* ```docker compose run app bundle exec rails db:from_fixtures```
+* Type `localhost:3000` in a browser to open app.
+
 Support
 -------------------------
 

@@ -8,6 +8,7 @@ development:
   <<: *default
   database: ost-development
   username: <%= ENV["PSQL_DEV_USERNAME"] || "postgres" %>
+  password: <%= ENV["PSQL_DEV_PASSWORD"] || "password" %>
   host: <%= ENV["PSQL_DEV_HOST"] || "localhost" %>
 
 # Warning: The database defined as "test" will be erased and
@@ -17,5 +18,5 @@ test:
   <<: *default
   database: ost-test
   username: <%= ENV["PSQL_TEST_USERNAME"] || "postgres" %>
-  password: <%= ENV["PSQL_TEST_PASSWORD"] || "postgres" %>
+  password: <%= ENV["PSQL_TEST_PASSWORD"] || "password" %>
   host: <%= ENV["PSQL_TEST_HOST"] || "localhost" %>
