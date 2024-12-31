@@ -144,7 +144,7 @@ navigate to the OpenSplitTime directory and type:
 $ bin/dev
 ```
 
-Setup Project Using Docker
+Setup Project Using Docker Compose
 -------------------------
 * Make sure docker in installed on your machine.
 * Create .env file in project root directory.
@@ -159,6 +159,31 @@ Once all containers are up, it is time to seed database. To seed database with s
 * ```docker compose run app bundle exec rails db:from_fixtures```
 * Type `localhost:3000` in a browser to open app.
 
+
+Setup Project Using Single Node Docker Swarm
+-------------------------
+* Make sure docker in installed on your machine.
+* Create .env file in project root directory.
+* Copy contents of .env_example file to .env file.
+* Fill in values for required credentials.
+* Build the Docker image for the application using the command below. Note that the primary purpose of Docker Swarm is to maintain the desired number of running containers.
+    ```
+    docker image build . -t app-image
+    ```
+* Initialize docker swarm using below command:
+    ```
+    docker swarm init
+    ```
+* Run following command to deploy docker swarm, it will take some time to start containers:
+    ```
+    export $(cat .env) > /dev/null 2>&1; docker stack deploy -c docker-compose-swarm.yml open_split_time_stack
+    ```
+* To list all the services in open_split_time_stack run following command:
+    ```
+    docker stack services open_split_time_stack
+    ```
+Once all containers are up, you can browse app at following URL:
+* Type `localhost:3000` in a browser to open app.
 Support
 -------------------------
 
