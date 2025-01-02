@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidekiq
+  template:
+    metadata:
+      labels:
+        app: sidekiq
+    spec:
+      containers:
+        - name: sidekiq
+          image: app-image:latest
+          imagePullPolicy: Never
+          command: ["bundle", "exec", "sidekiq"]
+          env:
+            - name: REDIS_URL
+              value: redis://redis:6379/1
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
